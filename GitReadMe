@@ -1,0 +1,8 @@
+# git commit之后，想撤销commit
+
+git reset --soft HEAD^ ：仅仅撤销commit 操作，写的代码依然保留
+
+HEAD^的意思是上一个版本，也可以写成HEAD~1
+
+如果你进行了2次commit，想都撤回，可以使用HEAD~2
+

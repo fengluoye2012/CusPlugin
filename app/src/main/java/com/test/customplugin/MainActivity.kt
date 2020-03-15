@@ -23,6 +23,8 @@ class MainActivity : BaseActivity() {
     override fun initListeners() {
         super.initListeners()
 
+        LogUtils.e("test")
+
         //匿名类的使用
         tv_load_plugin.setOnClickListener {
             View.OnClickListener {
