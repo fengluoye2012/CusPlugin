@@ -1,4 +1,4 @@
-package com.test.customplugin
+package com.test.plugin
 
 import android.app.Application
 import android.content.Context

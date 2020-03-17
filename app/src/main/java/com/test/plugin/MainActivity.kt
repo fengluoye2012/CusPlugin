@@ -1,6 +1,7 @@
-package com.test.customplugin
+package com.test.plugin
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.AssetManager
 import android.os.Environment
 import android.util.Log
@@ -10,7 +11,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.virtualapk.PluginManager
-import com.test.imageload.base.BaseActivity
+import com.test.baselibrary.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.io.InputStream
@@ -18,6 +19,11 @@ import java.io.InputStream
 class MainActivity : BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_main
+    }
+
+    override fun initData() {
+        super.initData()
+        applyPermission()
     }
 
     override fun initListeners() {
@@ -28,20 +34,31 @@ class MainActivity : BaseActivity() {
         //匿名类的使用
         tv_load_plugin.setOnClickListener {
             View.OnClickListener {
-
-                //接口回调
-                PermissionUtils.permission(PermissionConstants.STORAGE)
-                    .callback(object : PermissionUtils.SimpleCallback {
-                        override fun onGranted() {
-                            loadPlugin(it.context)
-                        }
-
-                        override fun onDenied() {
-                            loadPlugin(it.context)
-                        }
-                    })
+                val pkg = ""
+                if (PluginManager.getInstance(act).getLoadedPlugin(pkg) == null) {
+                    ToastUtils.showShort("plugin $pkg not loaded")
+                    return@OnClickListener
+                }
+                
+                val intent = Intent()
+                intent.setClass(act, "jjjj")
+                startActivity(intent)
             }
         }
+    }
+
+    private fun applyPermission() {
+        //接口回调
+        PermissionUtils.permission(PermissionConstants.STORAGE)
+            .callback(object : PermissionUtils.SimpleCallback {
+                override fun onGranted() {
+                    loadPlugin(act)
+                }
+
+                override fun onDenied() {
+                    loadPlugin(act)
+                }
+            })
     }
 
     private fun loadPlugin(base: Context) {

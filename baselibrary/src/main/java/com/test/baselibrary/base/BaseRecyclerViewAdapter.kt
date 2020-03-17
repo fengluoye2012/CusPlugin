@@ -1,4 +1,4 @@
-package com.test.imageload.base
+package com.test.baselibrary.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

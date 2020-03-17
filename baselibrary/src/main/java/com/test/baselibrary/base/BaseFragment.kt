@@ -1,4 +1,4 @@
-package com.test.imageload.base
+package com.test.baselibrary.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
