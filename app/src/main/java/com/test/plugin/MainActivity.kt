@@ -39,9 +39,9 @@ class MainActivity : BaseActivity() {
                     ToastUtils.showShort("plugin $pkg not loaded")
                     return@OnClickListener
                 }
-                
+
                 val intent = Intent()
-                intent.setClass(act, "jjjj")
+                intent.setClassName(act, "com.test.plugin.demo.TestActivity")
                 startActivity(intent)
             }
         }

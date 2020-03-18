@@ -1,19 +1,15 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-//host
-apply plugin: 'com.didi.virtualapk.host'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion versions.version_compile_sdk
     defaultConfig {
-        applicationId "com.test.customplugin"
         minSdkVersion versions.version_min_sdk
         targetSdkVersion versions.version_target
-        versionCode versions.version_code
-        versionName versions.version_name
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,5 +20,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":baselibrary")
+
+    api deps.kotlin.stdlib_jdk7
+    api deps.androidx.appcompat
+    api deps.androidx.core
+    api deps.androidx.constraintlayout
+    api deps.androidx.runner
+    api deps.androidx.recyclerview
+    api deps.androidx.espresso
+    api deps.junit
+    api deps.virtualapk.core
+    api deps.util
+
 }

@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//host
-apply plugin: 'com.didi.virtualapk.host'
+//插件
+apply plugin: 'com.didi.virtualapk.plugin'
+
 
 android {
     compileSdkVersion versions.version_compile_sdk
     defaultConfig {
-        applicationId "com.test.customplugin"
+        applicationId "com.test.testplugin.demo"
         minSdkVersion versions.version_min_sdk
         targetSdkVersion versions.version_target
         versionCode versions.version_code
@@ -20,9 +21,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file("../../keystore/test.keystore")
+            storePassword "test123456"
+            keyAlias "test"
+            keyPassword "test123456"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":baselibrary")
+
+}
+
+virtualApk {
+    packageId = 0x6f //插件资源表中的packageId，需要确保不同插件有不同的packageId.
+    targetHost = '../../CusPlugin/app' //宿主工程application模块的路径，插件的构建需要依赖这个路径
+    applyHostMapping = true //默认为true，如果插件有引用宿主的类，那么这个选项可以使得插件和宿主保持混淆一致
 }
